@@ -80,7 +80,20 @@ const ModalNewPokemon: React.FC<IModalProps> = ({ isOpen, setIsOpen }) => {
 
       try {
         if (newImage === null) {
-          toast.error('Add uma imagem para criar um pokemon  ϞϞ(๑⚈ ․̫ ⚈๑)∩', {
+          toast.error(
+            'Adicione uma imagem para criar um pokemon  ϞϞ(๑⚈ ․̫ ⚈๑)∩',
+            {
+              position: 'top-left',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            },
+          );
+        } else if (selectType === null) {
+          toast.error('Adicione um tipo para o Pokemon  ϞϞ(๑⚈ ․̫ ⚈๑)∩', {
             position: 'top-left',
             autoClose: 5000,
             hideProgressBar: false,
@@ -105,7 +118,16 @@ const ModalNewPokemon: React.FC<IModalProps> = ({ isOpen, setIsOpen }) => {
               .max(3, 'No maximo 3 caracteres'),
             habilidade_1: Yup.string()
               .required('Habilidade 1 obrigatório')
-              .max(35, 'No maximo 10 caracteres'),
+              .max(35, 'No maximo 35 caracteres'),
+            habilidade_2: Yup.string()
+              .required('Habilidade 2 obrigatório')
+              .max(35, 'No maximo 35 caracteres'),
+            habilidade_3: Yup.string()
+              .required('Habilidade 3 obrigatório')
+              .max(35, 'No maximo 35 caracteres'),
+            habilidade_4: Yup.string()
+              .required('Habilidade 4 obrigatório')
+              .max(35, 'No maximo 35 caracteres'),
             def: Yup.string()
               .required('Defesa obrigatória')
               .max(3, 'No maximo 3 caracteres'),
