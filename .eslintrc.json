@@ -1,0 +1,71 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+      "array-callback-return": "off",
+      "no-param-reassign": "off",
+      "no-unused-vars": "off",
+      "react/jsx-no-constructed-context-values": "off",
+      "react/prop-types": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "treact/prop-types": "off",
+      "global-require": "off",
+      "react/require-default-props": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/function-component-definition": "off",
+      "import/prefer-default-export": "off",
+      "prettier/prettier": "error",
+			"react-hooks/rules-of-hooks": "error",
+	    "react-hooks/exhaustive-deps": "warn",
+	    "react/jsx-filename-extension": [
+	      1,
+	      {
+	        "extensions": [
+	          ".tsx"
+	        ]
+	      }
+	    ],
+	    "import/extensions": [
+	      "error",
+	      "ignorePackages",
+	      {
+	        "ts": "never",
+	        "tsx": "never"
+	      }
+	    ],
+	    "no-use-before-define": "off",
+	    "@typescript-eslint/no-use-before-define": [
+	      "error"
+	    ],
+	    "react/react-in-jsx-scope": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    }
+}
