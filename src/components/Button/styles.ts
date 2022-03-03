@@ -29,7 +29,4 @@ export const Container = styled.button`
   @media (max-width: 600px) {
     font-size: 16px;
   }
-  @media (max-width: 413px) {
-    width: 40%;
-  }
 `;

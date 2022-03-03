@@ -60,6 +60,9 @@ export const Container = styled.div`
   background: #f7f9fc;
   border-radius: 24px 24px 1rem 1rem;
   padding: 5px;
+  @media (max-width: 700px) {
+    height: 105rem;
+  }
 `;
 
 export const Content = styled(Form)`

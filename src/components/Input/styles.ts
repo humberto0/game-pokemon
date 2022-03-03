@@ -52,11 +52,8 @@ export const Container = styled.div<ContainerProps>`
   svg {
     margin-right: 16px;
   }
-  @media (max-width: 900px) {
-    width: 80%;
-  }
-  @media (max-width: 409px) {
-    width: 70%;
+  @media (max-width: 500px) {
+    height: 38px;
   }
 `;
 
