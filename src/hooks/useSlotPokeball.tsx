@@ -7,6 +7,7 @@ interface AuthContextData {
   slotPokeball: PokemonType[];
   freePokemon: (id: number | string) => void;
   addPokeball: (dadosPokemon: PokemonType) => void;
+  editName: (id: number | string, newName: string) => void;
 }
 export const AddyContext = createContext<AuthContextData>(
   {} as AuthContextData,
@@ -27,15 +28,20 @@ export const AddyHookProvider = ({ children }: any) => {
   };
 
   const freePokemon = async (id: number | string) => {
-    await setSlotPokeball(
-      slotPokeball.filter((pokemon, index: number) => pokemon.id !== id),
-    );
+    setSlotPokeball(slotPokeball.filter(pokemon => pokemon.id !== id));
     setLimite(false);
+  };
+
+  const editName = (id: number | string, newName: string) => {
+    const teste = slotPokeball;
+    teste.find(item => item.id === id)!.name = newName;
+    console.log(teste);
+    setSlotPokeball(teste);
   };
 
   return (
     <AddyContext.Provider
-      value={{ addPokeball, slotPokeball, limite, freePokemon }}
+      value={{ addPokeball, slotPokeball, limite, freePokemon, editName }}
     >
       {children}
     </AddyContext.Provider>

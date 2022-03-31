@@ -14,35 +14,23 @@ import {
   GiWeightLiftingUp,
 } from 'react-icons/gi';
 import Modal from 'react-modal';
-import {
-  BsFillShieldFill,
-  BsClockHistory,
-  BsSpeedometer2,
-} from 'react-icons/bs';
-
+import { BsFillShieldFill, BsSpeedometer2 } from 'react-icons/bs';
 import { FormHandles } from '@unform/core';
-
 import makeAnimated from 'react-select/animated';
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
-import TypePokemon from '../TypePokemon';
-import pokeball from '../../assets/pokeball.svg';
 import {
   Content,
   Container,
   AvatarInput,
   Type,
-  ContainerType,
   Free,
-  Statistic,
   Titulo,
   SelectTypePokemon,
 } from './styles';
-import { PokemonType } from '../../types/pokemonTypes';
 import { useAddyHook } from '../../hooks/useSlotPokeball';
-import { translate } from '../../util/Translate';
-import { options, SelectPokemonTypeOption } from '../../util/SelectTypes';
+import { options } from '../../util/SelectTypes';
 import Button from '../Button';
 import Input from '../Input';
 import getValidationErrors from '../../util/GetValidationErrors';

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Form } from '@unform/web';
 
 export const AvatarInput = styled.div`
   position: absolute;
@@ -47,6 +48,37 @@ export const Container = styled.div`
   }
 `;
 
+export const InputPk = styled(Form)`
+  padding: 100px 10px 10px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  > button {
+    background: #edf1f7;
+    border-radius: 4px;
+    border: none;
+    max-width: 48px;
+    max-height: 48px;
+    min-height: 45px;
+    min-width: 45px;
+    width: 100%;
+    height: 100%;
+    svg {
+      color: #2e3a59;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    &:hover {
+      svg {
+        color: #fff;
+      }
+    }
+    & + button {
+      margin-left: 5px;
+    }
+  }
+`;
+
 export const Content = styled.div`
   padding: 24px 24px;
   display: flex;
@@ -60,12 +92,18 @@ export const Content = styled.div`
     height: 52rem;
   }
   h1 {
+    margin-left: 10px;
     margin-top: 109px;
     font-weight: 700;
     font-size: 18px;
     line-height: 24px;
     color: #2e3a59;
     text-transform: uppercase;
+    > button {
+      background: transparent;
+      border: none;
+      margin-left: 10px;
+    }
   }
   > h4 {
     font-weight: 700;
