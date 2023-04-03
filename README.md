@@ -2,6 +2,8 @@
 
 This is a game made with React, Formik, Styled Components, Animations and Context.
 
+                          ![App Pokemon](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRkZDY4ZTA0MzEwYzAwNGY0N2M4NzZhOWM4MDc4NzlmMjM4YzgwNyZjdD1n/gyt6z18TSb0OmoYC1m/giphy.gif)
+
 ## About the project
 
 This project is a Pokemon game made with React, Formik, Styled Components, Animations and Context. It uses the listed dependencies above, and it was made as a personal project to improve my skills with React and web development.
