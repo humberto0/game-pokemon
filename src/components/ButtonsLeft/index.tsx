@@ -1,74 +1,84 @@
-import React, { useState } from 'react';
-import { IconBaseProps } from 'react-icons';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { AiOutlinePlus, AiOutlineClear } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 import { Container, ButtonEditarPokemon, ButtonNewPokemon } from './styles';
-import { useAddyHook } from '../../hooks/useSlotPokeball';
 import ModalEditOrFree from '../ModalEditOrFree';
 import ModalNewPokemon from '../ModalNewPokemon';
+import { IButtonsLeftProps } from './types';
+import { store } from '../../redux/store';
+import { clearPokemon } from '../../redux/slices';
 
-interface ButtonProps {
-  showModal?: () => void;
-}
-const SlotButton = ({ showModal }: ButtonProps) => {
-  const numberButton = [0, 1, 2, 3, 4, 5];
+const SlotButton: FC<IButtonsLeftProps> = ({ numberOfButtons }) => {
   const [modalEdit, setModalEdit] = useState(false);
-  const [modalNewPokemon, setModalNewPokemon] = useState(false);
-  const [indexPokemon, setIndexPokemon] = useState(0);
-  const { slotPokeball, limite } = useAddyHook();
-  const showModalEditOrFree = () => {
-    setModalEdit(!modalEdit);
-  };
-  const showModalNewPokemon = () => {
-    setModalNewPokemon(!modalNewPokemon);
-  };
 
-  const selectionPokemon = (id: number) => {
-    setIndexPokemon(id);
-    showModalEditOrFree();
-  };
+  const [modalNewPokemon, setModalNewPokemon] = useState(false);
+  const [idPokemon, setIdPokemon] = useState<number | undefined>();
+  const listPokemon = useSelector(
+    () => store.getState().pokemonReducer.listPokemon,
+  );
+
+  const showModalNewPokemon = useCallback(() => {
+    setModalNewPokemon(!modalNewPokemon);
+  }, [modalNewPokemon]);
+
+  const showModalEditPokemon = useCallback(
+    async (id?: number) => {
+      if (id) {
+        setIdPokemon(id);
+      }
+      setModalEdit(!modalEdit);
+    },
+    [modalEdit],
+  );
+
+  const buttonsSlot = useMemo(() => {
+    return Array.from({ length: numberOfButtons }, (__, index) => (
+      <ButtonEditarPokemon
+        onClick={() =>
+          listPokemon[index]?.name &&
+          showModalEditPokemon(listPokemon[index]?.id)
+        }
+        key={index}
+        className={listPokemon[index]?.name ? 'slotFull' : ''}
+      >
+        {listPokemon[index]?.name ? (
+          <img
+            src={listPokemon[index]?.image}
+            alt={listPokemon[index]?.name}
+            loading="lazy"
+          />
+        ) : (
+          '?'
+        )}
+      </ButtonEditarPokemon>
+    ));
+  }, [numberOfButtons, listPokemon, showModalEditPokemon]);
 
   return (
     <Container>
-      {numberButton.map((item, index) => (
-        <ButtonEditarPokemon
-          onClick={() =>
-            slotPokeball[item]?.sprites?.front_default !== undefined &&
-            selectionPokemon(item)
-          }
-          key={item}
-          style={
-            slotPokeball[item]?.sprites?.front_default !== undefined
-              ? {
-                  background: '#F7F9FC',
-                  border: '4px solid #00d68f',
-                }
-              : { background: '#00d68f' }
-          }
-        >
-          {slotPokeball[item]?.sprites?.front_default !== undefined ? (
-            <img
-              src={slotPokeball[item]?.sprites?.front_default}
-              alt={slotPokeball[item]?.name}
-            />
-          ) : (
-            '?'
-          )}
-        </ButtonEditarPokemon>
-      ))}
+      {buttonsSlot}
       <ButtonNewPokemon
         onClick={() => {
-          if (!limite) {
+          if (listPokemon.length < 6) {
             showModalNewPokemon();
           }
         }}
       >
         <AiOutlinePlus />
       </ButtonNewPokemon>
-      <ModalEditOrFree
-        isOpen={modalEdit}
-        setIsOpen={showModalEditOrFree}
-        selectPokemon={indexPokemon}
-      />
+      <ButtonNewPokemon
+        className="clearPokemon"
+        onClick={() => store.dispatch(clearPokemon())}
+      >
+        <AiOutlineClear />
+      </ButtonNewPokemon>
+      {idPokemon && (
+        <ModalEditOrFree
+          isOpen={modalEdit}
+          setIsOpen={showModalEditPokemon}
+          selectPokemon={idPokemon}
+        />
+      )}
       <ModalNewPokemon
         isOpen={modalNewPokemon}
         setIsOpen={showModalNewPokemon}

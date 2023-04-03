@@ -7,11 +7,7 @@ const Start = () => {
   const history = useNavigate();
   return (
     <Background>
-      <Image
-        src={logoPokemon}
-        alt="GoRestaurant"
-        style={{ marginBottom: '40px' }}
-      />
+      <Image src={logoPokemon} alt="GoRestaurant" />
       <Animacao>
         <Button onClick={() => history('/pokemon')}>START</Button>
       </Animacao>

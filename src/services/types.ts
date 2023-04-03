@@ -1,4 +1,4 @@
-export type PokemonType = {
+export interface PokemonPkProps {
   id: number;
   name: string;
   height: string;
@@ -16,4 +16,7 @@ export type PokemonType = {
       name: string;
     };
   }[];
-};
+}
+export interface PokemonData {
+  pokemon_v2_pokemon_by_pk: PokemonPkProps;
+}

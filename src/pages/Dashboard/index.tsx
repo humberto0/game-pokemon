@@ -1,8 +1,7 @@
 import lottie from 'lottie-web';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { AxiosResponse } from 'axios';
-import api from '../../services/api';
+import { useLazyQuery } from '@apollo/client';
 import {
   Background,
   SubImage,
@@ -20,58 +19,17 @@ import sandshrew from '../../assets/sandshrew.gif';
 import macacoPokemon from '../../assets/macacoPokemon.gif';
 import pikachu from '../../assets/pikachu.gif';
 import ModalCapture from '../../components/ModalCapture';
-import { useAddyHook } from '../../hooks/useSlotPokeball';
 import { PokemonType } from '../../types/pokemonTypes';
+import { store } from '../../redux/store';
+import { GET_POKEMONS } from '../../services/getPokemons';
+import { PokemonData } from '../../services/types';
 import SlotButton from '../../components/ButtonsLeft';
+import { addPokemon } from '../../redux/slices';
 
 const Dashboard = () => {
-  const { addPokeball, limite } = useAddyHook();
-  const [loading, setLoading] = useState(false);
   const [modalCaptureOpen, setModalCaptureOpen] = useState(false);
-  const [whoPokemon, setWhoPokemon] = useState<PokemonType>({
-    id: 0,
-    height: 0,
-    name: 'null',
-    weight: 0,
-    sprites: {
-      front_default: 'null',
-    },
-    stats: [
-      {
-        base_stat: 0,
-      },
-      {
-        base_stat: 1,
-      },
-      {
-        base_stat: 2,
-      },
-      {
-        base_stat: 3,
-      },
-      {
-        base_stat: 4,
-      },
-      {
-        base_stat: 5,
-      },
-    ],
-    abilities: [
-      {
-        ability: {
-          name: 'null',
-        },
-      },
-    ],
-    types: [
-      {
-        type: {
-          name: 'null',
-        },
-      },
-    ],
-  });
-
+  const [whoPokemon, setWhoPokemon] = useState<PokemonType>();
+  const { pokemonReducer } = store.getState();
   const container: any = useRef(null);
   useEffect(() => {
     lottie.loadAnimation({
@@ -83,43 +41,41 @@ const Dashboard = () => {
     });
   }, []);
 
-  const showModalCapture = () => {
+  const handleModalCapture = useCallback(() => {
     setModalCaptureOpen(!modalCaptureOpen);
-  };
-  const addPokemon = () => {
-    addPokeball(whoPokemon);
-    showModalCapture();
-  };
+  }, [modalCaptureOpen]);
 
-  const searchPokemon = async () => {
-    setLoading(true);
-    const pokemonRandom = Math.floor(Math.random() * 807) + 1;
-    try {
-      const response: AxiosResponse = await api.get(`/${pokemonRandom}`);
-      setLoading(false);
-      setWhoPokemon(response.data);
-      showModalCapture();
-    } catch (err) {
-      setLoading(false);
-      toast.error(
-        'Ocorreu um erro ao capturar um pokemon, tente novamente mais tarde  ϞϞ(๑⚈ ․̫ ⚈๑)∩',
-        {
-          position: 'top-left',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        },
+  const [getPokemon, { loading }] = useLazyQuery<PokemonData>(GET_POKEMONS);
+
+  const HandleCapture = useCallback(() => {
+    if (pokemonReducer?.listPokemon?.length < 6 && whoPokemon) {
+      store.dispatch(
+        addPokemon({
+          ...whoPokemon,
+          image: `https://img.pokemondb.net/artwork/${whoPokemon?.name}.jpg`,
+        }),
       );
     }
-  };
+  }, [pokemonReducer?.listPokemon?.length, whoPokemon]);
+
+  const handleSearch = useCallback(() => {
+    getPokemon({
+      variables: { id: Math.floor(Math.random() * 800) + 1 },
+      nextFetchPolicy: 'network-only',
+    }).then(res => {
+      if (res.data?.pokemon_v2_pokemon_by_pk) {
+        setWhoPokemon(res.data?.pokemon_v2_pokemon_by_pk);
+        handleModalCapture();
+      } else {
+        toast.error('Pokemon não encontrado');
+      }
+    });
+  }, [getPokemon, handleModalCapture]);
 
   return (
     <Background>
       <ToastContainer />
-      <SlotButton />
+      <SlotButton numberOfButtons={6} />
 
       <PokemonPlant src={bulba} alt="bulbasauro" />
       <PokemonEarth src={sandshrew} alt="bulbasauro" />
@@ -128,14 +84,16 @@ const Dashboard = () => {
       <SubImage className="container" ref={container} />
       <PokemonWater src={squirtle} alt="Water Pokemon" />
 
-      <ModalCapture
-        capture={addPokemon}
-        isOpen={modalCaptureOpen}
-        setIsOpen={showModalCapture}
-        dadosPokemon={whoPokemon}
-      />
+      {whoPokemon && (
+        <ModalCapture
+          isOpen={modalCaptureOpen}
+          setIsOpen={handleModalCapture}
+          dadosPokemon={whoPokemon}
+          capture={HandleCapture}
+        />
+      )}
       {!modalCaptureOpen && (
-        <AshButton loading={loading} search={searchPokemon} />
+        <AshButton loading={loading} search={handleSearch} />
       )}
     </Background>
   );

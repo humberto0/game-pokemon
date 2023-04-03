@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FiX, FiEdit3 } from 'react-icons/fi';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FiX } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { BsFillShieldFill, BsSpeedometer2 } from 'react-icons/bs';
 import { GiBroadsword } from 'react-icons/gi';
@@ -8,6 +8,7 @@ import { CgPokemon } from 'react-icons/cg';
 import { FormHandles } from '@unform/core';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 import TypePokemon from '../TypePokemon';
 import {
   Content,
@@ -19,11 +20,13 @@ import {
   Statistic,
   InputPk,
 } from './styles';
-import { useAddyHook } from '../../hooks/useSlotPokeball';
 import { translate } from '../../util/Translate';
 import Button from '../Button';
 import Input from '../Input';
 import getValidationErrors from '../../util/GetValidationErrors';
+import { store } from '../../redux/store';
+import { freePokemon, updatePokemon } from '../../redux/slices';
+import { PokemonProps } from '../../redux/slices/types';
 
 interface IModalProps {
   isOpen: boolean;
@@ -39,40 +42,60 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
   setIsOpen,
   selectPokemon,
 }) => {
-  const { slotPokeball, freePokemon, editName } = useAddyHook();
+  const listPokemon = useSelector(
+    () => store.getState().pokemonReducer.listPokemon,
+  );
   const [editarNome, setEditarNome] = useState(false);
   const formRef = useRef<FormHandles>(null);
-  const [name, setName] = useState<string>(slotPokeball[selectPokemon]?.name);
-  const showInput = () => {
+  const estatisticList = [
+    { tipo: 'ataque', icon: <GiBroadsword /> },
+    { tipo: 'defesa', icon: <BsFillShieldFill /> },
+    { tipo: 'ataque-especial', icon: <GiBroadsword /> },
+    { tipo: 'defesa-especial', icon: <BsFillShieldFill /> },
+    { tipo: 'velocidade', icon: <BsSpeedometer2 /> },
+  ];
+  const [name, setName] = useState<string>(
+    listPokemon.find(item => item.id === selectPokemon)?.name ?? '',
+  );
+  const [pokemon, setPokemon] = useState<PokemonProps>(
+    listPokemon.find(item => item.id === selectPokemon) ?? ({} as PokemonProps),
+  );
+  const showInput = useCallback(() => {
     setEditarNome(!editarNome);
-  };
+  }, [editarNome]);
 
   useEffect(() => {
     setEditarNome(false);
-    setName(slotPokeball[selectPokemon]?.name);
-  }, [slotPokeball, selectPokemon, isOpen]);
+    setPokemon(
+      listPokemon.find(item => item.id === selectPokemon) as PokemonProps,
+    );
+    setName(listPokemon.find(item => item.id === selectPokemon)?.name ?? '');
+  }, [selectPokemon, isOpen, listPokemon]);
 
-  const handleSubmit = async (data: FormEdit) => {
-    formRef.current?.setErrors({});
-    try {
-      const schema = Yup.object().shape({
-        name: Yup.string()
-          .required('Nome obrigatório')
-          .max(50, 'No maximo 50 caracteres'),
-      });
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-      showInput();
-      setName(data.name);
-      editName(slotPokeball[selectPokemon]?.id, data.name);
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
+  const handleSubmit = useCallback(
+    async (data: FormEdit) => {
+      formRef.current?.setErrors({});
+      try {
+        const schema = Yup.object().shape({
+          name: Yup.string()
+            .required('Nome obrigatório')
+            .max(50, 'No maximo 50 caracteres'),
+        });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+        showInput();
+        setName(data.name);
+        store.dispatch(updatePokemon({ id: selectPokemon, name: data.name }));
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
       }
-    }
-  };
+    },
+    [showInput, selectPokemon],
+  );
 
   return (
     <Modal
@@ -92,13 +115,11 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
       >
         <FiX />
       </button>
-      {slotPokeball !== undefined && slotPokeball.length > 0 && (
+
+      {pokemon && (
         <>
           <AvatarInput>
-            <img
-              src={slotPokeball[selectPokemon]?.sprites?.front_default}
-              alt={slotPokeball[selectPokemon]?.name}
-            />
+            <img src={pokemon.image} alt={pokemon.name} loading="lazy" />
           </AvatarInput>
           <Container>
             <Content>
@@ -130,19 +151,19 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
                 <aside>
                   <h2>HP</h2>
                   <h3>
-                    {slotPokeball[selectPokemon]?.stats[0]?.base_stat}/
-                    {slotPokeball[selectPokemon]?.stats[0]?.base_stat}
+                    {pokemon.pokemon_v2_pokemonstats[0].base_stat}/
+                    {pokemon.pokemon_v2_pokemonstats[0].base_stat}
                   </h3>
                 </aside>
                 <p />
                 <aside>
                   <h2>ALTURA</h2>
-                  <h3>{slotPokeball[selectPokemon]?.height} m</h3>
+                  <h3>{pokemon.height} m</h3>
                 </aside>
                 <p />
                 <aside>
                   <h2>PESO</h2>
-                  <h3>{slotPokeball[selectPokemon]?.weight} KG</h3>
+                  <h3>{pokemon.weight} KG</h3>
                 </aside>
               </div>
               <Type>
@@ -151,10 +172,10 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
                 <div />
               </Type>
               <ContainerType>
-                {slotPokeball[selectPokemon]?.types?.map(item => (
+                {pokemon.pokemon_v2_pokemontypes?.map(item => (
                   <TypePokemon
-                    key={item.type.name}
-                    name={translate(item.type.name)}
+                    key={item.pokemon_v2_type.name}
+                    name={translate(item.pokemon_v2_type.name)}
                   />
                 ))}
               </ContainerType>
@@ -164,8 +185,8 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
                 <div />
               </Type>
               <h4>
-                {slotPokeball[selectPokemon]?.abilities?.map(
-                  (item: any) => `${item?.ability?.name}, `,
+                {pokemon.pokemon_v2_pokemonabilities?.map(
+                  item => `${item.pokemon_v2_ability.name}, `,
                 )}
               </h4>
               <Type>
@@ -173,50 +194,25 @@ const ModalEditOrFree: React.FC<IModalProps> = ({
                 <h3>ESTATÍSTICAS</h3>
                 <div />
               </Type>
-              <Statistic>
-                <h5>
-                  <BsFillShieldFill />
-                  Defesa
-                </h5>
-                <h5>{slotPokeball[selectPokemon]?.stats[2]?.base_stat}</h5>
-              </Statistic>
-              <Statistic>
-                <h5>
-                  <GiBroadsword />
-                  Ataque
-                </h5>
-                <h5>{slotPokeball[selectPokemon]?.stats[1]?.base_stat}</h5>
-              </Statistic>
-              <Statistic>
-                <h5>
-                  <BsFillShieldFill />
-                  defesa especial
-                </h5>
-                <h5>{slotPokeball[selectPokemon]?.stats[4]?.base_stat}</h5>
-              </Statistic>
-              <Statistic>
-                <h5>
-                  <GiBroadsword />
-                  ataque especial
-                </h5>
-                <h5>{slotPokeball[selectPokemon]?.stats[3]?.base_stat}</h5>
-              </Statistic>
-              <Statistic>
-                <h5>
-                  <BsSpeedometer2 />
-                  velocidade
-                </h5>
-                <h5>{slotPokeball[selectPokemon]?.stats[5]?.base_stat}</h5>
-              </Statistic>
+              {pokemon.pokemon_v2_pokemonstats.slice(1).map((item, index) => (
+                <Statistic>
+                  <h5>
+                    {estatisticList[index]?.icon}
+                    {estatisticList[index]?.tipo}
+                  </h5>
+                  <h5>{item.base_stat}</h5>
+                </Statistic>
+              ))}
             </Content>
           </Container>
         </>
       )}
+
       <Free>
         <Button
-          style={{ maxWidth: '221px', width: '100%' }}
+          className="freePokemon"
           onClick={() => {
-            freePokemon(slotPokeball[selectPokemon].id);
+            store.dispatch(freePokemon(pokemon.id));
             setIsOpen();
           }}
         >

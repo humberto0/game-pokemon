@@ -21,8 +21,9 @@ export const Background = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 0.625rem;
   position: relative;
+  overflow: hidden;
 `;
 const appearFromLeft = keyframes`
 
@@ -39,13 +40,13 @@ const appearFromLeft = keyframes`
 
 export const SubImage = styled.div`
   position: absolute;
-  padding: 10px;
+  padding: 00.625rem;
   height: 80%;
 `;
 
 export const PokerBoll = styled.div`
   position: absolute;
-  padding: 10px;
+  padding: 0.625rem;
   height: 20%;
 `;
 
@@ -56,14 +57,14 @@ export const PokemonWater = styled.img`
   margin-left: 30%;
   bottom: 0;
   margin-bottom: 10%;
-  @media (max-width: 1240px) {
+  @media (max-width: 77.5rem) {
     margin-left: 25%;
   }
-  @media (max-width: 1146px) {
+  @media (max-width: 71.625rem) {
     margin-left: 25%;
     margin-bottom: 20%;
   }
-  @media (max-width: 854px) {
+  @media (max-width: 53.375rem) {
     margin-left: 25%;
     display: none;
   }
@@ -71,18 +72,16 @@ export const PokemonWater = styled.img`
 export const PokemonPlant = styled.img`
   position: absolute;
   margin-left: 30%;
-  height: 50px;
-  @media (max-width: 854px) {
+  height: 3.125rem;
+  @media (max-width: 53.375rem) {
     margin-left: 25%;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
   }
-  @media (max-width: 477px) {
+  @media (max-width: 29.9rem) {
     margin-left: 30%;
-    margin-bottom: 40px;
   }
-  @media (max-width: 319px) {
+  @media (max-width: 20rem) {
     margin-left: 35%;
-    margin-bottom: 40px;
   }
 `;
 export const PokemonEarth = styled.img`
@@ -90,17 +89,17 @@ export const PokemonEarth = styled.img`
   margin-bottom: 10%;
   right: 0;
   margin-right: 10%;
-  height: 50px;
+  height: 3.125rem;
 `;
 export const PokemonTree = styled.img`
   position: absolute;
   margin-bottom: 30%;
   left: 0;
   margin-left: 20%;
-  height: 50px;
-  margin-top: 10px;
+  height: 3.125rem;
+  margin-top: 0.625rem;
   @media (max-width: 854px) {
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
   }
   @media (max-width: 437px) {
     margin-left: 15%;
@@ -110,7 +109,7 @@ export const PokemonElectric = styled.img`
   position: absolute;
   margin-right: 2%;
   margin-bottom: 30px;
-  height: 50px;
+  height: 3.125rem;
   @media (max-width: 854px) {
     margin-right: 5%;
   }

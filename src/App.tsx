@@ -1,18 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider as ReduxProvider } from 'react-redux';
 import Routes from './routes';
 import GlobalStyle from './styles/global';
-import AppProvider from './hooks';
+import { persistor, store } from './redux/store';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <AppProvider>
-        <Router>
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Routes />
-        </Router>
-      </AppProvider>
+        </PersistGate>
+      </ReduxProvider>
     </>
   );
 }

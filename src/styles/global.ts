@@ -25,13 +25,13 @@ export default createGlobalStyle`
   }
 
   html {
-    @media (max-width: 1400px) {
+    @media (max-width: 87.5rem) {
       font-size: 93.75%;
     }
-    @media (max-width: 720px) {
+    @media (max-width: 45rem) {
       font-size: 87.5%;
     }
-    @media (max-width: 450px) {
+    @media (max-width: 2.8125rem) {
       font-size: 83.5%;
     }
   }
@@ -45,14 +45,14 @@ export default createGlobalStyle`
   height: 100%;
   max-height: 35.5rem;
   width: 100%;
-  max-width: 360px;
+  max-width: 22.5rem;
   background: linear-gradient(90deg, #43E97B 0%, #38F9D7 100%);
   position: relative;
   border-radius: 1rem;
-  @media (max-width: 450px) {
+  @media (max-width: 28.125rem) {
     max-height: 34.5rem;
   }
-  @media (max-width: 740px) {
+  @media (max-width: 46.25rem) {
     max-height: 34.5rem;
   }
 }
@@ -61,10 +61,10 @@ export default createGlobalStyle`
   right: 1.5rem;
   top: 1.5rem;
   background: #F7F9FC;
-  height: 38px;
-  width: 38px;
-  border: 2px solid #8F9BB3;
-  border-radius: 1000px;
+  height: 2.375rem;
+  width: 2.375rem;
+  border: 0.125rem solid #8F9BB3;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +99,7 @@ export default createGlobalStyle`
   height: 100%;
   max-height: 35.5rem;
   width: 100%;
-  max-width: 360px;
+  max-width: 22.5rem;
   background: linear-gradient(90deg, #43E97B 0%, #38F9D7 100%);
   position: relative;
   border-radius: 1rem;
@@ -107,10 +107,10 @@ export default createGlobalStyle`
   ::-webkit-scrollbar {
     display: none;
   }
-  @media (max-width: 450px) {
+  @media (max-width: 28.125rem) {
     max-height: 34.5rem;
   }
-  @media (max-width: 740px) {
+  @media (max-width: 46.25rem) {
     max-height: 34.5rem;
   }
 }

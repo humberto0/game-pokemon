@@ -18,7 +18,8 @@ const rotation = keyframes`
 `;
 export const Image = styled.img`
   animation: ${rotation} 1s;
-  @media (max-width: 330px) {
+  margin-bottom: 2.5rem;
+  @media (max-width: 20.6rem) {
     width: 90%;
   }
 `;
@@ -26,7 +27,7 @@ export const Image = styled.img`
 const appearFromLeft = keyframes`
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-3.125rem);
   }
   to {
     opacity: 1;

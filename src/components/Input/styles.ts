@@ -8,20 +8,20 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  margin-left: 5px;
+  margin-left: 0.3125rem;
   background: #ffffff;
-  height: 48px;
-  border-radius: 5px;
-  border: 2px solid #ffffff;
-  padding: 16px;
-  max-width: 315px;
+  height: 3rem;
+  border-radius: 0.3125rem;
+  border: 0.125rem solid #ffffff;
+  padding: 1rem;
+  max-width: 19.68rem;
   width: 100%;
   color: #c3c3c3;
-  margin-right: 20px;
+  margin-right: 1.25rem;
   display: flex;
   align-items: center;
   & + div {
-    margin-top: 8px;
+    margin-top: 0.5rem;
   }
   ${props =>
     props.isErrored &&
@@ -50,16 +50,16 @@ export const Container = styled.div<ContainerProps>`
     }
   }
   svg {
-    margin-right: 16px;
+    margin-right: 1rem;
   }
-  @media (max-width: 500px) {
-    height: 38px;
+  @media (max-width: 31.25rem) {
+    height: 2.375rem;
   }
 `;
 
 export const Error = styled(Tooltip)`
-  height: 20px;
-  margin-left: 16px;
+  height: 1.25rem;
+  margin-left: 1rem;
   svg {
     margin: 0;
   }

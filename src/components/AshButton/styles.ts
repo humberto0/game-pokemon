@@ -8,13 +8,13 @@ export const Container = styled.div`
 
 export const Content = styled.button`
   background: transparent;
-  max-height: 82px;
-  border-radius: 42px;
-  height: 82px;
-  max-width: 90px;
-  width: 80px;
+  max-height: 5.125rem;
+  border-radius: 2.625rem;
+  height: 5.125rem;
+  max-width: 5.625rem;
+  width: 5rem;
   border: 0;
-  padding: 10px;
+  padding: 0.625rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,11 +30,11 @@ const rotation = keyframes`
 `;
 
 export const PopoverSearch = styled(Popover)`
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   background-color: #f7f9fc;
-  border-radius: 7px;
+  border-radius: 0.4375rem;
   box-sizing: border-box;
-  border: 5px solid #db2c66;
+  border: 0.3125rem solid #db2c66;
   box-shadow: none;
   color: #db2c66;
   &:before {
@@ -44,11 +44,11 @@ export const PopoverSearch = styled(Popover)`
     box-shadow: none;
     content: '';
     position: absolute;
-    border: 6px solid #ffffff;
+    border: 0.375rem solid #ffffff;
     border-right-color: transparent;
     border-top-color: transparent;
     box-shadow: -0.2rem 0.2rem 0.7rem rgb(0 0 0 / 7%);
-    top: calc(100% - 7px);
+    top: calc(100% - 0.4375rem);
     left: 50%;
     -webkit-transform: translateX(-50%) rotate(-45deg);
     -ms-transform: translateX(-50%) rotate(-45deg);
@@ -60,14 +60,14 @@ export const PopoverSearch = styled(Popover)`
       height: 100%;
       svg {
         font-weight: 700;
-        font-size: 30px;
+        font-size: 1.875rem;
       }
     }
   }
   &.toLoading {
-    padding: 5px;
-    width: 90px;
-    height: 85px;
+    padding: 0.3125rem;
+    width: 5.625rem;
+    height: 5.3125rem;
     div {
       width: 100%;
       height: 100%;
@@ -77,14 +77,17 @@ export const PopoverSearch = styled(Popover)`
       svg {
         animation: ${rotation} infinite 2s;
         font-weight: 700;
-        font-size: 40px;
+        font-size: 2.5rem;
       }
     }
   }
 `;
 
-export const Image = styled.img``;
+export const Image = styled.img`
+  margin-bottom: 2.5rem;
+`;
 
 export const ImageGif = styled.img`
-  height: 60px;
+  height: 3.75rem;
+  margin-bottom: 2.5rem;
 `;

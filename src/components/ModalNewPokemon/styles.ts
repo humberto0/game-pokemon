@@ -5,68 +5,66 @@ import { shade } from 'polished';
 
 export const AvatarInput = styled.div`
   position: absolute;
-  width: 247px;
-  height: 247px;
+  width: 15.4375rem;
+  height: 15.4375rem;
   background: #f7f9fc;
   border-radius: 50%;
   z-index: 10;
-  margin-top: 32px;
-  margin-left: 15%;
-  border: 4px solid #00d68f;
+  top: 2rem;
+  left: 15%;
+  border: 0.25rem solid #00d68f;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  @media (max-width: 23.8125rem) {
+    margin-left: 20%;
+    width: 12.5rem;
+    height: 12.5rem;
+  }
+  @media (max-width: 22.94rem) {
+    margin-left: 18%;
+  }
+  @media (max-width: 21rem) {
+    margin-left: 15%;
+  }
   label {
-    background: transparent;
-    border-radius: 50%;
-    right: 0;
-    bottom: 0;
-    border: 0;
+    max-height: 9.3rem;
+    max-width: 9.3rem;
+    height: 100%;
+    width: 100%;
     cursor: pointer;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     input {
       display: none;
     }
   }
-  @media (max-width: 381px) {
-    margin-left: 20%;
-    width: 200px;
-    height: 200px;
-  }
-  @media (max-width: 367px) {
-    margin-left: 18%;
-    width: 200px;
-    height: 200px;
-  }
-  @media (max-width: 335px) {
-    margin-left: 15%;
-    width: 200px;
-    height: 200px;
-  }
   img {
-    height: 150px;
+    max-height: 9.3rem;
+    max-width: 9.3rem;
+    height: 100%;
+    width: 100%;
+    margin-left: 0.8rem;
+    &.addImage {
+      margin-left: 0;
+    }
   }
 `;
 
 export const Container = styled.div`
-  margin-top: 153px;
+  position: absolute;
   width: 100%;
-  height: 95rem;
+  height: 70%;
   bottom: 0;
   background: #f7f9fc;
-  border-radius: 24px 24px 1rem 1rem;
-  padding: 5px;
-  @media (max-width: 700px) {
-    height: 105rem;
+  border-radius: 1.5rem 1.5rem 1rem 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 
 export const Content = styled(Form)`
-  padding: 150px 10px 10px 10px;
+  padding: 9.375rem 0.625rem 0.625rem 0.625rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -79,14 +77,14 @@ export const SelectTypePokemon = styled(Select)`
 `;
 
 export const Titulo = styled.label`
-  margin-left: 5px;
-  margin-top: 10px;
+  margin-left: 0.3125rem;
+  margin-top: 0.625rem;
   font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 0.75rem;
+  line-height: 1rem;
   color: #2e3a59;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 0.375rem;
 `;
 export const Type = styled.article`
   display: flex;
@@ -94,15 +92,15 @@ export const Type = styled.article`
   justify-content: center;
   width: 100%;
   > div {
-    border: 1px solid #c5cee0;
+    border: 0.0625rem solid #c5cee0;
     width: 100%;
-    height: 1px;
+    height: 0.0625rem;
   }
   > h3 {
-    padding: 15px;
+    padding: 0.9375rem;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 24px;
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
     text-align: center;
   }
 `;
@@ -111,7 +109,7 @@ export const ContainerType = styled.article`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 5px;
+  margin-right: 0.3125rem;
 `;
 
 export const Free = styled.div`
@@ -129,16 +127,16 @@ export const Statistic = styled.article`
   align-items: center;
   justify-content: space-between;
   width: 95%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   > h5 {
     display: flex;
     align-items: center;
     font-weight: 700;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
     text-transform: uppercase;
     svg {
-      margin-right: 5px;
+      margin-right: 0.3125rem;
     }
   }
 `;

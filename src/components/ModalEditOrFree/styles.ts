@@ -3,34 +3,34 @@ import { Form } from '@unform/web';
 
 export const AvatarInput = styled.div`
   position: absolute;
-  width: 247px;
-  height: 247px;
+  width: 15.4375rem;
+  height: 15.4375rem;
   background: #f7f9fc;
   border-radius: 50%;
   z-index: 10;
-  margin-top: 32px;
-  margin-left: 15%;
-  border: 4px solid #00d68f;
+  top: 2rem;
+  left: 15%;
+  border: 0.25rem solid #00d68f;
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 381px) {
+  @media (max-width: 23.8125rem) {
     margin-left: 20%;
-    width: 200px;
-    height: 200px;
+    width: 12.5rem;
+    height: 12.5rem;
   }
-  @media (max-width: 367px) {
+  @media (max-width: 22.94rem) {
     margin-left: 18%;
-    width: 200px;
-    height: 200px;
   }
-  @media (max-width: 335px) {
+  @media (max-width: 21rem) {
     margin-left: 15%;
-    width: 200px;
-    height: 200px;
   }
   img {
-    height: 150px;
+    max-height: 9.3rem;
+    max-width: 9.3rem;
+    height: 100%;
+    width: 100%;
+    background: no-repeat center center / cover;
   }
 `;
 
@@ -40,8 +40,7 @@ export const Container = styled.div`
   height: 70%;
   bottom: 0;
   background: #f7f9fc;
-
-  border-radius: 24px 24px 1rem 1rem;
+  border-radius: 1.5rem 1.5rem 1rem 1rem;
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -49,23 +48,23 @@ export const Container = styled.div`
 `;
 
 export const InputPk = styled(Form)`
-  padding: 100px 10px 10px 10px;
+  padding: 6.25rem 0.625rem 0.625rem 0.625rem;
   width: 100%;
   display: flex;
   justify-content: center;
   > button {
     background: #edf1f7;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     border: none;
-    max-width: 48px;
-    max-height: 48px;
-    min-height: 45px;
-    min-width: 45px;
+    max-width: 3rem;
+    max-height: 3rem;
+    min-height: 2.8rem;
+    min-width: 2.8rem;
     width: 100%;
     height: 100%;
     svg {
       color: #2e3a59;
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: bold;
     }
     &:hover {
@@ -74,41 +73,41 @@ export const InputPk = styled(Form)`
       }
     }
     & + button {
-      margin-left: 5px;
+      margin-left: 0.3125rem;
     }
   }
 `;
 
 export const Content = styled.div`
-  padding: 24px 24px;
+  padding: 1.5rem;
   display: flex;
   height: 46.8rem;
   align-items: center;
   flex-direction: column;
-  @media (max-width: 760px) {
+  @media (max-width: 47.5rem) {
     height: 50.8rem;
   }
-  @media (max-width: 436px) {
+  @media (max-width: 27.25rem) {
     height: 52rem;
   }
   h1 {
-    margin-left: 10px;
-    margin-top: 109px;
+    margin-left: 0.625rem;
+    margin-top: 6.8125rem;
     font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
     color: #2e3a59;
     text-transform: uppercase;
     > button {
       background: transparent;
       border: none;
-      margin-left: 10px;
+      margin-left: 0.625rem;
     }
   }
   > h4 {
     font-weight: 700;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
 
     text-align: center;
     text-transform: uppercase;
@@ -116,12 +115,12 @@ export const Content = styled.div`
   > div {
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: 1fr 5px 1fr 5px 1fr;
+    grid-template-columns: 1fr 0.3125rem 1fr 0.3125rem 1fr;
     gap: 1rem;
     > p {
-      border: 1px solid #c5cee0;
-      width: 1px;
-      height: 48px;
+      border: 0.0625rem solid #c5cee0;
+      width: 00.0625rem;
+      height: 3rem;
     }
     aside {
       display: flex;
@@ -132,13 +131,13 @@ export const Content = styled.div`
       h2 {
         font-style: normal;
         font-weight: 700;
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 0.75rem;
+        line-height: 1rem;
       }
       > h3 {
         font-weight: 700;
-        font-size: 18px;
-        line-height: 24px;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
       }
     }
   }
@@ -149,15 +148,15 @@ export const Type = styled.article`
   justify-content: center;
   width: 100%;
   > div {
-    border: 1px solid #c5cee0;
+    border: 0.0625rem solid #c5cee0;
     width: 100%;
-    height: 1px;
+    height: 0.0625rem;
   }
   > h3 {
-    padding: 15px;
+    padding: 0.9375rem;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 24px;
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
     text-align: center;
   }
 `;
@@ -166,7 +165,7 @@ export const ContainerType = styled.article`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 5px;
+  margin-right: 0.3125rem;
 `;
 
 export const Free = styled.div`
@@ -179,7 +178,7 @@ export const Free = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 56px;
+  margin-bottom: 3.5rem;
 `;
 
 export const Statistic = styled.article`
@@ -187,16 +186,16 @@ export const Statistic = styled.article`
   align-items: center;
   justify-content: space-between;
   width: 95%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   > h5 {
     display: flex;
     align-items: center;
     font-weight: 700;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
     text-transform: uppercase;
     svg {
-      margin-right: 5px;
+      margin-right: 0.3125rem;
     }
   }
 `;

@@ -1,15 +1,20 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Start from '../pages/Start';
 import Dashboard from '../pages/Dashboard';
 
+export const routers = createBrowserRouter([
+  {
+    path: '/',
+    element: <Start />,
+  },
+  {
+    path: '/pokemon',
+    element: <Dashboard />,
+  },
+]);
+
 function AllRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<Start />} />
-      <Route path="/pokemon" element={<Dashboard />} />
-    </Routes>
-  );
+  return <RouterProvider router={routers} />;
 }
 
 export default AllRoutes;

@@ -10,17 +10,9 @@ import {
   Type,
   ContainerType,
   Pokeboll,
-  ButtonRolagem,
 } from './styles';
-import { PokemonType } from '../../types/pokemonTypes';
 import { translate } from '../../util/Translate';
-
-interface IModalProps {
-  dadosPokemon: PokemonType;
-  isOpen: boolean;
-  setIsOpen: () => void;
-  capture: () => void;
-}
+import { IModalProps } from './types';
 
 const ModalCapture: React.FC<IModalProps> = ({
   isOpen,
@@ -48,8 +40,9 @@ const ModalCapture: React.FC<IModalProps> = ({
       </button>
       <AvatarInput>
         <img
-          src={dadosPokemon?.sprites?.front_default}
-          alt={dadosPokemon?.name}
+          src={`https://img.pokemondb.net/artwork/${dadosPokemon.name}.jpg`}
+          alt={dadosPokemon.name}
+          loading="lazy"
         />
       </AvatarInput>
       <Container>
@@ -59,8 +52,8 @@ const ModalCapture: React.FC<IModalProps> = ({
             <aside>
               <h2>HP</h2>
               <h3>
-                {dadosPokemon.stats[0]?.base_stat}/
-                {dadosPokemon.stats[0]?.base_stat}
+                {dadosPokemon.pokemon_v2_pokemonstats[0].base_stat}/
+                {dadosPokemon.pokemon_v2_pokemonstats[0].base_stat}
               </h3>
             </aside>
             <p />
@@ -80,10 +73,10 @@ const ModalCapture: React.FC<IModalProps> = ({
             <div />
           </Type>
           <ContainerType>
-            {dadosPokemon.types.map(item => (
+            {dadosPokemon.pokemon_v2_pokemontypes.map(item => (
               <TypePokemon
-                key={item.type.name}
-                name={translate(item.type.name)}
+                key={item.pokemon_v2_type.name}
+                name={translate(item.pokemon_v2_type.name)}
               />
             ))}
           </ContainerType>
@@ -93,8 +86,8 @@ const ModalCapture: React.FC<IModalProps> = ({
             <div />
           </Type>
           <h4 id="nomedaancora">
-            {dadosPokemon.abilities?.map(
-              (item: any) => `${item?.ability?.name}, `,
+            {dadosPokemon.pokemon_v2_pokemonabilities?.map(
+              item => `${item.pokemon_v2_ability.name}, `,
             )}
           </h4>
         </Content>
@@ -102,6 +95,7 @@ const ModalCapture: React.FC<IModalProps> = ({
       <Pokeboll
         onClick={() => {
           capture();
+          setIsOpen();
         }}
       >
         <img src={pokeball} alt="pokeboll" />
