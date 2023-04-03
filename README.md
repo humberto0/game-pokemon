@@ -2,7 +2,10 @@
 
 This is a game made with React, Formik, Styled Components, Animations and Context.
 
-                          ![App Pokemon](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRkZDY4ZTA0MzEwYzAwNGY0N2M4NzZhOWM4MDc4NzlmMjM4YzgwNyZjdD1n/gyt6z18TSb0OmoYC1m/giphy.gif)
+![AppPokemon](https://user-images.githubusercontent.com/15384670/229601608-d3158d6c-0562-4eff-b407-4cf1fc32d7eb.gif)
+
+
+                     
 
 ## About the project
 
