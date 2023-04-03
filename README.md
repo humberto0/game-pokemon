@@ -2,6 +2,8 @@
 
 This is a game made with React, Formik, Styled Components, Animations and Context.
 
+![Captura de tela de 2023-04-03 13-20-33](https://user-images.githubusercontent.com/15384670/229601936-c34d27ee-afe0-4750-a69c-090c576e557d.png)
+
 ![AppPokemon](https://user-images.githubusercontent.com/15384670/229601608-d3158d6c-0562-4eff-b407-4cf1fc32d7eb.gif)
 
 
