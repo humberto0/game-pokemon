@@ -9,8 +9,7 @@ This is a game made with React, Formik, Styled Components, Animations and Contex
 
 This project is a Pokemon game made with React, Formik, Styled Components, Animations and Context. It uses the listed dependencies above, and it was made as a personal project to improve my skills with React and web development.
 
-
-https://user-images.githubusercontent.com/15384670/229602616-283b584e-108d-4cb6-95cb-20538088234b.mp4
+![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/15384670/230655249-cb3355f8-9384-4656-9e25-75f68b75649f.gif)
 
 
 
