@@ -1,6 +1,6 @@
 # Pokemon React Game
 
-This is a game made with React, Formik, Styled Components, Animations and Context.
+This is a game made with React, ReactForm, Styled Components, Animations, Redux and GraphQl.
 
 ![Pokemon](https://user-images.githubusercontent.com/15384670/229601936-c34d27ee-afe0-4750-a69c-090c576e557d.png)
                      
