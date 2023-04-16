@@ -37,7 +37,6 @@ This project is not open for contributions.
 *    "@typescript-eslint/parser": "^5.12.1",
 *    "@unform/core": "2.1.0",
 *    "@unform/web": "2.1.0",
-*    "axios": "^0.26.0",
 *    "eslint-config-airbnb": "^19.0.4",
 *    "eslint-plugin-import": "^2.25.3",
 *    "eslint-plugin-jsx-a11y": "^6.5.1",
